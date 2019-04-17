@@ -1,0 +1,4 @@
+Barca,1
+Real,2
+Juventus,3
+Manchester,4

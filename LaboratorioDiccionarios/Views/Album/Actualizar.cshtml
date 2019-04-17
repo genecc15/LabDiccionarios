@@ -1,0 +1,74 @@
+﻿@using LaboratorioDiccionarios.Models;
+@model IEnumerable<Album2>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <style type="text/css">
+        body {
+            font-family: Arial;
+            font-size: 10pt;
+        }
+
+        table {
+            border: 1px solid #ccc;
+            border-collapse: collapse;
+            background-color: #fff;
+        }
+
+            table th {
+                background-color: #B8DBFD;
+                color: #333;
+                font-weight: bold;
+            }
+
+            table th, table td {
+                padding: 5px;
+                border: 1px solid #ccc;
+            }
+
+            table, table table td {
+                border: 0px solid #ccc;
+            }
+    </style>
+</head>
+<body>
+<h3>Actualizar Album</h3>
+@using (Html.BeginForm("Actualizar", "Album", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <input type="file" name="Album2" />
+    <input type="submit" value="Importar" />
+}
+@if (Model.Count() > 0)
+{
+    <hr />
+    <table cellpadding="0" cellspacing="0">
+        <tr>
+            <th>Codigo</th>
+            <th>Equipo/Llave</th>
+        </tr>
+        @foreach (Album2 item in Model)
+        {
+            <tr>
+                <td>@item.Codigo2</td>
+                <td>@item.Equipo2</td>
+            </tr>
+        }
+    </table>
+}
+
+    <h2>Ingresar Busqueda</h2>
+    <form action="/Album/Diccionario2" method="post">
+        <div>
+            <h3>Llave de equipo</h3>
+            <input type="text" name="llave" value=""/>
+        </div>
+    </form>
+</body>
+</html>
