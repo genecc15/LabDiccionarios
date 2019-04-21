@@ -9,6 +9,7 @@ namespace LaboratorioDiccionarios.Models
     {
         public int Codigo { get; set; }
         public string Equipo { get; set; }
+        public string Existe { get; set; }
     }
 
     public class Album2

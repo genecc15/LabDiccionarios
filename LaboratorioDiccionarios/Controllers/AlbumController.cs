@@ -75,10 +75,10 @@ namespace LaboratorioDiccionarios.Controllers
 
         [HttpPost]
 
-        public ActionResult Actualizar(HttpPostedFileBase album2)
+        public ActionResult Actualizar(HttpPostedFileBase album)
         {
             string filePath2 = string.Empty;
-            if (album2 != null)
+            if (album != null)
             {
                 string path2 = Server.MapPath("~/Uploads/");
                 if (!Directory.Exists(path2))
@@ -86,9 +86,9 @@ namespace LaboratorioDiccionarios.Controllers
                     Directory.CreateDirectory(path2);
                 }
 
-                filePath2 = path2 + Path.GetFileName(album2.FileName);
-                string extension2 = Path.GetExtension(album2.FileName);
-                album2.SaveAs(filePath2);
+                filePath2 = path2 + Path.GetFileName(album.FileName);
+                string extension2 = Path.GetExtension(album.FileName);
+                album.SaveAs(filePath2);
 
                 string csvData2 = System.IO.File.ReadAllText(filePath2);
                 foreach (string row2 in csvData2.Split('\n'))
@@ -108,9 +108,17 @@ namespace LaboratorioDiccionarios.Controllers
             return View(AlbumN);
         }
 
+        //Metodo para ver que estampas son agregadas
+        public ActionResult Existencia()
+        {
+            var list1 = AlbumP.Where(i => !AlbumN.Contains(i)).ToList();
+            var list2 = AlbumN.Where(i => !AlbumP.Contains(i)).ToList();
+            return View(list2);
+        }
+
         //Pasar lista a diccionario2
 
-        public ActionResult Diccionario2(Album2 llave)
+        public ActionResult Diccionario2(Album2 Llave)
         {
             var res2 = new Dictionary<Album2, Album2>();
             foreach (Album2 item in AlbumN)
@@ -121,7 +129,7 @@ namespace LaboratorioDiccionarios.Controllers
                 }
             }
 
-            return View(res2[llave]);
+            return View(res2[Llave]);
         }
 
         public ActionResult Buscar()
